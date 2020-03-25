@@ -17,7 +17,21 @@ export default {
 				content: process.env.npm_package_description || ""
 			}
 		],
-		link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+		link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+		script: [
+			{
+				src: "https://code.jquery.com/jquery-3.4.1.slim.min.js",
+				type: "text/javascript"
+			},
+			{
+				src: "https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js",
+				type: "text/javascript"
+			},
+			{
+				src: "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js",
+				type: "text/javascript"
+			}
+		]
 	},
 	/*
 	 ** Customize the progress-bar color
@@ -26,7 +40,7 @@ export default {
 	/*
 	 ** Global CSS
 	 */
-	css: [],
+	css: ["~/assets/css/bootstrap.min.css"],
 	/*
 	 ** Plugins to load before mounting the App
 	 */
@@ -36,7 +50,6 @@ export default {
 	 */
 	buildModules: [
 		// Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-		"@nuxtjs/tailwindcss"
 	],
 	/*
 	 ** Nuxt.js modules
@@ -61,11 +74,10 @@ export default {
 	 ** Build configuration
 	 */
 	build: {
+		vendor: ["jquery", "bootstrap"],
 		extractCSS: true,
 		postcss: {
-			plugins: {
-				tailwindcss: "./tailwind.config.js"
-			}
+			plugins: {}
 		},
 		purgeCSS: {
 			mode: "postcss"
