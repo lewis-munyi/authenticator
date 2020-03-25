@@ -1,17 +1,19 @@
 <template>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
-		<a class="navbar-brand" href="#">Authenticator</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse d-lg-flex justify-content-lg-end" id="navbarColor01">
-			<div class="dropdown ">
-				<img data-toggle="dropdown" :src="this.$store.state.user.photoURL" id="userDetails" alt="" aria-haspopup="true" aria-expanded="false" />
-				<div class="dropdown-menu dropdown-menu-lg-right dropdown-menu-sm-left" aria-labelledby="userDetails">
-					<a class="dropdown-item" href="#">{{ this.$store.state.user.displayName }}</a>
-					<a class="dropdown-item" href="#">{{ this.$store.state.user.email }}</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" @submit.prevent="signOut" @click="signOut">Sign out</a>
+		<div class="container">
+			<h4 class="display-4">Authenticator</h4>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse d-lg-flex justify-content-lg-end" id="navbarColor01">
+				<div class="dropdown">
+					<img data-toggle="dropdown" :src="this.$store.state.user.photoURL" id="userDetails" alt="" aria-haspopup="true" aria-expanded="false" />
+					<div class="dropdown-menu dropdown-menu-lg-right dropdown-menu-sm-left" aria-labelledby="userDetails">
+						<a class="dropdown-item" href="#">{{ this.$store.state.user.displayName }}</a>
+						<a class="dropdown-item" href="#">{{ this.$store.state.user.email }}</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" @submit.prevent="signOut" @click="signOut">Sign out</a>
+					</div>
 				</div>
 			</div>
 		</div>
