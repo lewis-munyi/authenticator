@@ -68,12 +68,13 @@
 							{{client.data.description}}
 						</p>
 						<p class="lead">
-							<div class="form-group">
+							<div class="form-group d-flex justify-content-between">
 								<div class="custom-control custom-switch">
 									<input v-if="client.data.status === true" type="checkbox" :id="'statusSwitch' + client.id" class="custom-control-input bg-success"  @change="updateStatus(client.id)" checked>
 									<input v-else type="checkbox" class="custom-control-input " :id="'statusSwitch' + client.id" @change="updateStatus(client.id)">
 									<label class="custom-control-label" :for="'statusSwitch' + client.id">{{client.data.status === true ? "Active" : "Deactivated"}}</label>
 								</div>
+								<button class="btn btn-primary btn-sm" @click="copyToken(client.data.token)">Copy token</button>
 							</div>
 						</p>
 					</div>
@@ -158,6 +159,14 @@
 				}
 				catch(e){
 					this.$toast.error(`Error updating status. ${e.message}`, {duration: 3000})
+				}
+			},
+			async copyToken(token) {
+				try {
+					await this.$copyText(token);
+					this.$toast.show("Copied to clipboard", {duration: 1500});
+				} catch (e) {
+					this.$toast.error("Error copying token to clipboard");
 				}
 			},
 		},

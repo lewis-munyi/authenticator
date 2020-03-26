@@ -66,7 +66,8 @@ export default {
 		// Doc: https://github.com/nuxt-community/dotenv-module
 		"@nuxtjs/dotenv",
 		"nuxt-purgecss",
-		"@nuxtjs/toast"
+		"@nuxtjs/toast",
+		"nuxt-clipboard2"
 	],
 	router: {
 		middleware: ["auth"]
