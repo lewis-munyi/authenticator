@@ -60,7 +60,8 @@ exports.newClient = functions.https.onRequest((req, res) => {
                         clientContact: req.body.contact,
                         description: req.body.description,
                         status: req.body.status,
-                        timestamp: admin.firestore.FieldValue.serverTimestamp()
+                        timestamp: admin.firestore.FieldValue.serverTimestamp(),
+                        created_at: admin.firestore.FieldValue.serverTimestamp()
                     }).then((response) => {
                         return res.status(200).json({ client: response.id })
                     }).catch((err) => {
@@ -82,7 +83,7 @@ exports.allClients = functions.https.onRequest((req, res) => {
         try {
             admin.auth().verifyIdToken(req.header("Authorization").split(" ")[1]) // Pass JW Token
                 .then(function(decodedToken) {
-                    db.collection('users').doc(decodedToken.uid).collection('clients').orderBy("timestamp", "desc").get()
+                    db.collection('users').doc(decodedToken.uid).collection('clients').orderBy("created_at", "desc").get()
                         .then((snapshot) => {
                             let results = snapshot.docs.map((obj)=>{return {id:obj.id, data:obj.data()}});
                                 return res.status(200).send(results);
