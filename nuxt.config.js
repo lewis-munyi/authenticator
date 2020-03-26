@@ -36,7 +36,12 @@ export default {
 	/*
 	 ** Customize the progress-bar color
 	 */
-	loading: { color: "#fff" },
+	loading: {
+		name: 'chasing-dots',
+		color: '#375A7F',
+		background: '121212',
+		height: '4px'
+	},
 	/*
 	 ** Global CSS
 	 */
@@ -60,7 +65,8 @@ export default {
 		"@nuxtjs/pwa",
 		// Doc: https://github.com/nuxt-community/dotenv-module
 		"@nuxtjs/dotenv",
-		"nuxt-purgecss"
+		"nuxt-purgecss",
+		"@nuxtjs/toast"
 	],
 	router: {
 		middleware: ["auth"]
@@ -74,7 +80,6 @@ export default {
 	 ** Build configuration
 	 */
 	build: {
-		vendor: ["jquery", "bootstrap"],
 		extractCSS: true,
 		postcss: {
 			plugins: {}
@@ -87,5 +92,8 @@ export default {
 		 ** You can extend webpack config here
 		 */
 		extend(config, ctx) {}
+	},
+	toast: {
+		position: 'bottom-center',
 	}
 };

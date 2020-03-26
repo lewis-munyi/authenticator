@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<Navbar />
+
 		<div class="container mt-5 mb-5 ">
 			<div class="row d-flex justify-content-between">
 				<div class="col-sm-9">
@@ -148,6 +149,12 @@
 				</div>
 			</div>
 		</div>
+		<div class="container mt-5 mb-3" v-if="kanyeQuote">
+			<blockquote class="blockquote">
+				<p class="mb-0">{{kanyeQuote}}</p>
+				<footer class="blockquote-footer">Kanye West</footer>
+			</blockquote>
+		</div>
 	</div>
 </template>
 <script>
@@ -166,15 +173,19 @@
 					description: null,
 					status: false
 				},
-				projects: {}
+				projects: {},
+				kanyeQuote: null
 			};
 		},
-		mounted() {
+		async mounted() {
 			$('#newProjectModal').modal({
 				keyboard: false,
 				backdrop: false,
 				show: false
-			})
+			});
+			let {quote} = await this.$axios.$get('https://api.kanye.rest/');
+			this.kanyeQuote = quote;
+			// await this.$axios.post('hello', {'name': 1})
 		}
 	};
 </script>

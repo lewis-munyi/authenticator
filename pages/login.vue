@@ -39,6 +39,7 @@
 		methods: {
 			loginWithGoogle() {
 				this.$store.dispatch("login").then(() => {
+					this.$toast.success(`Hello ${this.$store.state.user.displayName.split(" ")[0]}. Welcome!`, { duration: 2000, keepOnHover: true });
 					this.$router.push("/dashboard");
 				});
 			},

@@ -58,7 +58,6 @@ export const actions = {
 		try {
 			//Get JWT token
 			const token = await auth.currentUser.getIdToken(true);
-			console.log(token);
 
 			// Add it to browser cookie
 			cookie.set("auth_token", token);
