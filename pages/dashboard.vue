@@ -126,7 +126,7 @@
 					return this.$toast.error("Fill out all the form fields", {duration: 3000});
 				}
 				try {
-					await this.$axios.$post('http://localhost:5000/authenticator-web/us-central1/newClient', this.form, config);
+					await this.$axios.$post('https://us-central1-authenticator-web.cloudfunctions.net/newClient', this.form, config);
 					this.getAllClients();
 					$('#newProjectModal').modal({ show: false });
 					this.$toast.success(`Added ${name}`, {duration: 2000});
@@ -140,7 +140,7 @@
 			getAllClients: async function(){
 				try {
 					this.isClientsLoading = true;
-					let { data } = await this.$axios.get("http://localhost:5000/authenticator-web/us-central1/allClients", config);
+					let { data } = await this.$axios.get("https://us-central1-authenticator-web.cloudfunctions.net/allClients", config);
 					this.allClients = data;
 					this.isClientsLoading = false;
 				}
@@ -153,7 +153,7 @@
 				try{
 					this.$toast.show("Updating ...", {duration: 3000});
 					this.isClientsLoading = true;
-					await this.$axios.$post("http://localhost:5000/authenticator-web/us-central1/updateClient", {id: id}, config);
+					await this.$axios.$post("https://us-central1-authenticator-web.cloudfunctions.net/updateClient", {id: id}, config);
 					this.getAllClients();
 				}
 				catch(e){
