@@ -49,6 +49,7 @@ export const actions = {
 		try {
 			// Log in user
 			let result = await auth.signInWithPopup(provider);
+			console.log("Trying log in");
 		} catch (error) {
 			// Handle Errors here.
 			console.error(error);

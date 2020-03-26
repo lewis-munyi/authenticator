@@ -1,63 +1,25 @@
 <template>
-	<div>
-		<div class="container mx-auto h-screen content-center">
-			<button type="button" class="google-button" @click="loginWithGoogle">
-				<span class="google-button__icon">
-					<svg viewBox="0 0 366 372" xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M125.9 10.2c40.2-13.9 85.3-13.6 125.3 1.1 22.2 8.2 42.5 21 59.9 37.1-5.8 6.3-12.1 12.2-18.1 18.3l-34.2 34.2c-11.3-10.8-25.1-19-40.1-23.6-17.6-5.3-36.6-6.1-54.6-2.2-21 4.5-40.5 15.5-55.6 30.9-12.2 12.3-21.4 27.5-27 43.9-20.3-15.8-40.6-31.5-61-47.3 21.5-43 60.1-76.9 105.4-92.4z"
-							id="Shape"
-							fill="#EA4335"
-						/>
-						<path
-							d="M20.6 102.4c20.3 15.8 40.6 31.5 61 47.3-8 23.3-8 49.2 0 72.4-20.3 15.8-40.6 31.6-60.9 47.3C1.9 232.7-3.8 189.6 4.4 149.2c3.3-16.2 8.7-32 16.2-46.8z"
-							id="Shape"
-							fill="#FBBC05"
-						/>
-						<path
-							d="M361.7 151.1c5.8 32.7 4.5 66.8-4.7 98.8-8.5 29.3-24.6 56.5-47.1 77.2l-59.1-45.9c19.5-13.1 33.3-34.3 37.2-57.5H186.6c.1-24.2.1-48.4.1-72.6h175z"
-							id="Shape"
-							fill="#4285F4"
-						/>
-						<path
-							d="M81.4 222.2c7.8 22.9 22.8 43.2 42.6 57.1 12.4 8.7 26.6 14.9 41.4 17.9 14.6 3 29.7 2.6 44.4.1 14.6-2.6 28.7-7.9 41-16.2l59.1 45.9c-21.3 19.7-48 33.1-76.2 39.6-31.2 7.1-64.2 7.3-95.2-1-24.6-6.5-47.7-18.2-67.6-34.1-20.9-16.6-38.3-38-50.4-62 20.3-15.7 40.6-31.5 60.9-47.3z"
-							fill="#34A853"
-						/>
-					</svg>
-				</span>
-				<span class="google-button__text">Sign in with Google</span>
-			</button>
-			<!--<form @submit.prevent="authenticate" @submit.enter="authenticate">
-				<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
-					<div class="mb-4">
-						<label class="block text-grey-darker text-sm font-bold mb-2" for="email">
-							Email
-						</label>
-						<input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" v-model="authDetails.email" id="email" type="email" placeholder="Enter email" />
-					</div>
-					<div class="mb-6">
-						<label class="block text-grey-darker text-sm font-bold mb-2" for="password">
-							Password
-						</label>
-						<input
-							class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3"
-							v-model="authDetails.password"
-							id="password"
-							type="password"
-							placeholder="******************"
-						/>
-						<p class="text-red text-xs italic">Please enter a password.</p>
-					</div>
-					<div class="flex items-center justify-between">
-						<button class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" type="button">
-							Sign In
-						</button>
-						<a class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="#">
-							Forgot Password?
-						</a>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-6 col-md-8 login-box">
+				<div class="col-lg-12 login-title">
+					Sign in to continue
+				</div>
+				<div class="col-lg-12 login-form">
+					<div class="col-lg-12 login-form">
+						<div class="col-lg-12 loginbttm">
+							<div class="col-lg-6 login-btm login-text">
+								<!-- Error Message -->
+								{{ error }}
+							</div>
+							<div class="col-lg-12 text-center login-btm login-button">
+								<button @click="loginWithGoogle" class="btn btn-outline-primary">Continue with Google</button>
+							</div>
+						</div>
 					</div>
 				</div>
-			</form>-->
+				<div class="col-lg-3 col-md-2"></div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -70,7 +32,8 @@
 				authDetails: {
 					email: null,
 					password: null
-				}
+				},
+				error: null
 			};
 		},
 		methods: {
@@ -86,58 +49,67 @@
 	};
 </script>
 
-<style lang="scss">
-	html {
-		background-color: #393e46 !important;
-	}
-	.container {
-		position: relative;
-	}
-	.google-button {
-		position: absolute;
-		left: 50%;
-		margin-left: -50px;
-		top: 50%;
-		margin-top: -50px;
-		height: 40px;
-		border-width: 0;
-		background: white;
-		color: #737373;
-		border-radius: 5px;
-		white-space: nowrap;
-		box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.05);
-		transition-property: background-color, box-shadow;
-		transition-duration: 150ms;
-		transition-timing-function: ease-in-out;
-		padding: 0;
-
-		&:focus,
-		&:hover {
-			box-shadow: 1px 4px 5px 1px rgba(0, 0, 0, 0.1);
-		}
-
-		&:active {
-			background-color: #e5e5e5;
-			box-shadow: none;
-			transition-duration: 10ms;
-		}
+<style lang="scss" scoped>
+	/*@import url(https://fonts.googleapis.com/css?family=Roboto);*/
+	.login-box {
+		margin-top: 75px;
+		height: auto;
+		background: #1a2226;
+		text-align: center;
+		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 	}
 
-	.google-button__icon {
-		display: inline-block;
-		vertical-align: middle;
-		margin: 8px 0 8px 8px;
-		width: 18px;
-		height: 18px;
-		box-sizing: border-box;
-	}
-
-	.google-button__text {
-		display: inline-block;
-		vertical-align: middle;
-		padding: 0 24px;
-		font-size: 14px;
+	.login-title {
+		margin-top: 15px;
+		text-align: center;
+		font-size: 30px;
+		letter-spacing: 2px;
+		margin-top: 30px;
 		font-weight: bold;
-		font-family: "Roboto", arial, sans-serif;
+		color: #ecf0f5;
+	}
+
+	.login-form {
+		margin-top: 25px;
+		text-align: left;
+	}
+
+	.form-group {
+		margin-bottom: 40px;
+		outline: 0px;
+	}
+	.btn-outline-primary {
+		border-color: #0db8de;
+		color: #0db8de;
+		border-radius: 0px;
+		font-weight: bold;
+		letter-spacing: 1px;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+	}
+
+	.btn-outline-primary:hover {
+		background-color: #0db8de;
+		color: #121212;
+		right: 0px;
+	}
+
+	.login-btm {
+		float: left;
+	}
+
+	.login-button {
+		padding-right: 0px;
+		text-align: right;
+		margin-bottom: 25px;
+	}
+
+	.login-text {
+		text-align: left;
+		padding-left: 0px;
+		color: red;
+	}
+
+	.loginbttm {
+		padding: 0px;
 	}
 </style>
