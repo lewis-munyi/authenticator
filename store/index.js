@@ -4,7 +4,8 @@ import JWTDecode from "jwt-decode";
 import cookieparser from "cookieparser";
 
 export const state = () => ({
-	user: null
+	user: null,
+	token: null
 });
 
 export const actions = {
@@ -49,7 +50,7 @@ export const actions = {
 		try {
 			// Log in user
 			let result = await auth.signInWithPopup(provider);
-			console.log("Trying log in");
+
 		} catch (error) {
 			// Handle Errors here.
 			console.error(error);
@@ -58,6 +59,7 @@ export const actions = {
 		try {
 			//Get JWT token
 			const token = await auth.currentUser.getIdToken(true);
+			commit("SET_TOKEN", token);
 
 			// Add it to browser cookie
 			cookie.set("auth_token", token);
@@ -74,5 +76,8 @@ export const actions = {
 export const mutations = {
 	SET_USER: (state, authUser) => {
 		state.user = authUser;
+	},
+	SET_TOKEN: (state, token) => {
+		state.token = token;
 	}
 };
