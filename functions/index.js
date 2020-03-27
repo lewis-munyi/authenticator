@@ -88,8 +88,8 @@ exports.newClient = functions.https.onRequest((req, res) => {
     return cors(req, res, () => {
         try {
             admin.auth().verifyIdToken(req.header("Authorization").split(" ")[1])
-                .then(function(decodedToken) {
-                    let clientRef = db.collection('users').doc(decodedToken.uid).collection('clients');
+                .then( function(decodedToken) {
+                    let clientRef =  db.collection('users').doc(decodedToken.uid).collection('clients');
                     clientRef
                         .add({
                             projectName: req.body.name,
@@ -97,15 +97,15 @@ exports.newClient = functions.https.onRequest((req, res) => {
                             clientContact: req.body.contact,
                             description: req.body.description,
                             status: req.body.status,
-                            timestamp: admin.firestore.FieldValue.serverTimestamp(),
+                            updated_at: admin.firestore.FieldValue.serverTimestamp(),
                             created_at: admin.firestore.FieldValue.serverTimestamp(),
                         })
                         .then((response) => {
                             clientRef
                                 .doc(response.id)
                                 .update({
-                                    token: AES.encrypt(JSON.stringify({user_id: decodedToken.uid, client_id: newClient}), 'secret key 123').toString(),
-                                    timestamp: admin.firestore.FieldValue.serverTimestamp()
+                                    token: AES.encrypt(JSON.stringify({user_id: decodedToken.uid, client_id: decodedToken.uid}), 'secret key 123').toString(),
+                                    updated_at: admin.firestore.FieldValue.serverTimestamp()
                                 })
                                 .then(()=>{
                                     return res.status(200).json({ message: 'success' })
