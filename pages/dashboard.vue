@@ -129,7 +129,7 @@
 				try {
 					await this.$axios.$post('https://us-central1-authenticator-web.cloudfunctions.net/newClient', this.form, config);
 					this.getAllClients();
-					$('#newProjectModal').modal({ show: false });
+					$('#newProjectModal').modal('hide');
 					this.$toast.success(`Added ${name}`, {duration: 2000});
 					this.form.name = this.form.client = this.form.contact = this.form.description = null;
 					this.form.status = false;

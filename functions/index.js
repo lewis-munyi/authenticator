@@ -15,6 +15,10 @@ let db = admin.firestore();
 exports.checkStatus = functions.https.onRequest((req, res) => {
     return cors(req, res, () => {
         try {
+            if(req.query.id === null){
+                return res.status(400).json({ error: 'bad request' });
+            }
+
             // Decrypt token
             let bytes  = AES.decrypt(req.body.token, 'secret key 123');
             let decryptedData = JSON.parse(bytes.toString(UTF8));
@@ -104,7 +108,7 @@ exports.newClient = functions.https.onRequest((req, res) => {
                             clientRef
                                 .doc(response.id)
                                 .update({
-                                    token: AES.encrypt(JSON.stringify({user_id: decodedToken.uid, client_id: decodedToken.uid}), 'secret key 123').toString(),
+                                    token: AES.encrypt(JSON.stringify({user_id: decodedToken.uid, client_id: response.id}), 'secret key 123').toString(),
                                     updated_at: admin.firestore.FieldValue.serverTimestamp()
                                 })
                                 .then(()=>{
