@@ -29,7 +29,7 @@
 		"cross-env": "^7.0.2",
 		"eslint-config-prettier": "^4.1.0",
 		"eslint-plugin-prettier": "^3.0.1",
-		"node-sass": "^4.13.1",
+		"node-sass": "^7.0.0",
 		"nuxt-purgecss": "^0.2.1",
 		"prettier": "^1.19.1",
 		"sass-loader": "^8.0.2"
